@@ -1,0 +1,31 @@
+{
+  "name": "devtinder",
+  "version": "1.0.0",
+  "description": "this is for enhancing skills",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon  src/app.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VinitaVrn/devTinder.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "tinder"
+  ],
+  "author": "Vinita Veerani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VinitaVrn/devTinder/issues"
+  },
+  "homepage": "https://github.com/VinitaVrn/devTinder#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
