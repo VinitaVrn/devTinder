@@ -6,6 +6,7 @@ const app=express()
 
 const PORT=7777
 
+app.use(express.json())
 app.use("/user",UserRouter)
 
 // app.use("/",(req,res)=>{
