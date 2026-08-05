@@ -1,16 +1,35 @@
-const user=require("./models/user-model.js")
+const User=require("../models/user-model")
 
 const signUp= async(req,res)=>{
    const data=req.body;
-   const  user=new user(data)
+   const  user=new User(data)
+   console.log("user")
    try{
     await user.save();
-    res.send("user added successfully")
+    console.log("user saved")
+    return res.send("user added successfully")
    }catch(err){
-    res.status(400).send(err.message)    
+   return res.status(400).send(err.message)    
    }
-    res.status(200).send("data saved ")
+   
+}
+
+const feed=async(req,res)=>{
+
+}
+// user by email
+const getUsers=async(req,res)=>{
+    const  email=req.body.emailId;
+    try{
+        const users=await User.find({emailId:email})
+        if(users.length===0){
+           return res.status(404).send("User not found")
+        }
+        return res.status(200).send(users)
+    }catch(err){
+        return res.status(400).send({error:err.message})
+    }
 }
 
 
-module.exports=signUp
+module.exports={signUp,getUsers}

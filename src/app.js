@@ -1,13 +1,13 @@
 const express= require("express");
 const connectDB=require("./config/db");
-const UserRouter=require("./routes/user-router")
+const userRouter= require("./routes/user-router")
 
 const app=express()
 
 const PORT=7777
 
 app.use(express.json())
-app.use("/user",UserRouter)
+app.use("/user",userRouter)
 
 // app.use("/",(req,res)=>{
 //     res.send("hello tinder")
@@ -15,7 +15,7 @@ app.use("/user",UserRouter)
 
 app.listen("7777", async()=>{
     try{
-      await connectDB;
+      await connectDB();
       console.log("DB connected")
       console.log("server is running on port",PORT)
     

@@ -1,6 +1,9 @@
-const {Router} =require("express")
-const {signUp}=require("./controller/user-controller")
+const {Router} =require("express");
+const {signUp,getUsers}=require("../controller/user-controller")
 
 const userRouter=Router();
 
-userRouter.post("/",signUp)
+userRouter.post("/signup",signUp)
+userRouter.get("/",getUsers)
+
+module.exports= userRouter
