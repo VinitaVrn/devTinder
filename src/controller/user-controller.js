@@ -53,7 +53,7 @@ const updateUser=async(req,res)=>{
     const userId=req.body.userID;
     const data=req.body;
     try{
-     await User.findByIdAndUpdate({_id:userId},data)
+     await User.findByIdAndUpdate({_id:userId},data,{runValidators:true})
      return res.status(200).send("user updated successfully")
     }catch(err){
      return res.status(400).send({error:err.message})
