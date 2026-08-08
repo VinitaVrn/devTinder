@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator=require("validator")
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -25,7 +26,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    validator(value){
+    validate(value){
       if(!validator.isStrongPassword(value)){
          throw new Error("keep strong password:"+value);
       }
