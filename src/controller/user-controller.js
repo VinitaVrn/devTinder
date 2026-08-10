@@ -1,6 +1,9 @@
 const User = require("../models/user-model");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
+const dotenv =require("env")
+
+dotenv.config();
 
 const signUp = async (req, res) => {
   const data = req.body;
@@ -26,17 +29,16 @@ const login = async (req, res) => {
       return res.status(404).send("user not found");
     }
 
-    console.log("Entered password:", password);
-    console.log("Stored password:", userData.password);
-    const isPasswordValid = await bcrypt.compare(password,userData.password);
-    console.log("Password valid:", isPasswordValid);
+ 
+    const isPasswordValid = await userData.verifyPassword(password)
+
     if (!isPasswordValid) {
       
       return res.status(400).send("Invalid Credentials");
     }
 
-    const token = jwt.sign({ _id: userData._id }, "DEVyugdyegfyu");
-    res.cookie("token", token);
+    const token = await userData.getJWT()
+    res.cookie("token", token,{httpOnly:true});
     res.status(200).send("Login Successfull");
   } catch (err) {
     res.status(500).send("Login failed:", err.message);
@@ -45,8 +47,15 @@ const login = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-  res.send("reading cookie");
+  try{
+    const user=req.user;
+    res.status(200).send(user)
+  }catch(err){
+    res.status(500).send("Error:",err.message)
+  }
 };
+
+
 
 const feed = async (req, res) => {
   try {
